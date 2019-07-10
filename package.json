@@ -1,0 +1,23 @@
+{
+  "name": "@brahma-dev/json-bigint",
+  "version": "1.0.0",
+  "description": "JSON parser that exclusively uses BigInt",
+  "main": "dist/index.js",
+  "dependencies": {
+    "jsonminify": "^0.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brahma-dev/json-bigint.git"
+  },
+  "author": "Brahma Dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brahma-dev/json-bigint/issues"
+  },
+  "homepage": "https://github.com/brahma-dev/json-bigint#readme"
+}
