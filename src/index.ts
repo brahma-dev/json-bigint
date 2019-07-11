@@ -3,7 +3,7 @@ export function parse(str: string, reviver?: Function) {
 	let prefix = `${(Math.random() * 4096).toFixed(6)}BigInt:::`;
 	return JSON.parse(
 		minify(str)
-			.replace(/(\d+)(?=([^"]*"[^"]*")*[^"]*$)/g, `"${prefix}$1"`),
+			.replace(/(-?\d+)(?=([^"]*"[^"]*")*[^"]*$)/g, `"${prefix}$1"`),
 		(key: string, value: any) => {
 			if (
 				typeof value === "string" &&

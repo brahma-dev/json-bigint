@@ -7,7 +7,7 @@ const jsonminify_1 = __importDefault(require("jsonminify"));
 function parse(str, reviver) {
     let prefix = `${(Math.random() * 4096).toFixed(6)}BigInt:::`;
     return JSON.parse(jsonminify_1.default(str)
-        .replace(/(\d+)(?=([^"]*"[^"]*")*[^"]*$)/g, `"${prefix}$1"`), (key, value) => {
+        .replace(/(-?\d+)(?=([^"]*"[^"]*")*[^"]*$)/g, `"${prefix}$1"`), (key, value) => {
         if (typeof value === "string" &&
             value !== null &&
             value.startsWith(prefix)) {
