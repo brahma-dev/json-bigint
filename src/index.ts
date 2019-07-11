@@ -1,9 +1,9 @@
 import minify from "jsonminify";
 export function parse(str: string, reviver?: Function) {
-	let prefix = `${(Math.random() * 4096).toFixed(6)}BigInt:::`;
+	const prefix = `${(Math.random() * 4096).toFixed(6)}BigInt:::`;
 	return JSON.parse(
 		minify(str)
-			.replace(/(-?\d+)(?=([^"]*"[^"]*")*[^"]*$)/g, `"${prefix}$1"`),
+			.replace(/(\-?\d+)(?=([^"]*"[^"]*")*[^"]*$)/g, `"${prefix}$1"`),
 		(key: string, value: any) => {
 			if (
 				typeof value === "string" &&
@@ -25,8 +25,8 @@ export function stringify(
 	replacer?: Function,
 	space?: string | number
 ) {
-	let prefix = `${(Math.random() * 4096).toFixed(6)}BigInt:::`;
-	let re = new RegExp(`"${prefix}([0-9]+)"`,'g');
+	const prefix = `${(Math.random() * 4096).toFixed(6)}BigInt:::`;
+	let re = new RegExp(`"${prefix}(-?[0-9]+)"`,'g');
 	return JSON.stringify(
 		value,
 		(key: string, value: any) => {
