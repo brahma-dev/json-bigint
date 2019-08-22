@@ -1,12 +1,15 @@
 {
   "name": "@brahma-dev/json-bigint",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JSON parser that exclusively uses BigInt",
   "main": "dist/index.js",
   "dependencies": {
-    "jsonminify": "^0.4.1"
+    "jsonminify": "^0.4.1",
+    "lossless-json": "^1.0.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node": "^12.7.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

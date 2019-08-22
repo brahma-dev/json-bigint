@@ -1,46 +1,36 @@
 import minify from "jsonminify";
+const LosslessJSON = require("lossless-json");
 export function parse(str: string, reviver?: Function) {
-	const prefix = `${(Math.random() * 4096).toFixed(6)}BigInt:::`;
-	return JSON.parse(
-		minify(str)
-			.replace(/(\-?\d+)(?=([^"]*"[^"]*")*[^"]*$)/g, `"${prefix}$1"`),
-		(key: string, value: any) => {
-			if (
-				typeof value === "string" &&
-				value !== null &&
-				value.startsWith(prefix)
-			) {
-				value = BigInt(value.replace(prefix, ""));
-			}
-			if (reviver) {
-				return reviver(key, value);
-			} else {
-				return value;
-			}
+	return LosslessJSON.parse(str, (key: any, value: any) => {
+		if (value && value.isLosslessNumber) {
+			value = BigInt(value.toString());
 		}
-	);
+		if (reviver) {
+			return reviver(key, value);
+		} else {
+			return value;
+		}
+	});
 }
 export function stringify(
 	value: object,
 	replacer?: Function,
 	space?: string | number
 ) {
-	const prefix = `${(Math.random() * 4096).toFixed(6)}BigInt:::`;
-	let re = new RegExp(`"${prefix}(-?[0-9]+)"`,'g');
-	return JSON.stringify(
+	return LosslessJSON.stringify(
 		value,
-		(key: string, value: any) => {
-			if (typeof value == "bigint") {
-				value = prefix + value.toString();
+		(k: any, v: any) => {
+			if (typeof v == "bigint") {
+				v = new LosslessJSON.LosslessNumber(v.toString());
 			}
 			if (replacer) {
-				return replacer(key, value);
+				return replacer(k, v);
 			} else {
-				return value;
+				return v;
 			}
 		},
 		space
-	).replace(re, "$1");
+	);
 }
 
 export default {

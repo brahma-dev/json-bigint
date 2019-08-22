@@ -1,17 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const jsonminify_1 = __importDefault(require("jsonminify"));
+const LosslessJSON = require("lossless-json");
 function parse(str, reviver) {
-    const prefix = `${(Math.random() * 4096).toFixed(6)}BigInt:::`;
-    return JSON.parse(jsonminify_1.default(str)
-        .replace(/(\-?\d+)(?=([^"]*"[^"]*")*[^"]*$)/g, `"${prefix}$1"`), (key, value) => {
-        if (typeof value === "string" &&
-            value !== null &&
-            value.startsWith(prefix)) {
-            value = BigInt(value.replace(prefix, ""));
+    return LosslessJSON.parse(str, (key, value) => {
+        if (value && value.isLosslessNumber) {
+            value = BigInt(value.toString());
         }
         if (reviver) {
             return reviver(key, value);
@@ -23,19 +16,17 @@ function parse(str, reviver) {
 }
 exports.parse = parse;
 function stringify(value, replacer, space) {
-    const prefix = `${(Math.random() * 4096).toFixed(6)}BigInt:::`;
-    let re = new RegExp(`"${prefix}(-?[0-9]+)"`, 'g');
-    return JSON.stringify(value, (key, value) => {
-        if (typeof value == "bigint") {
-            value = prefix + value.toString();
+    return LosslessJSON.stringify(value, (k, v) => {
+        if (typeof v == "bigint") {
+            v = new LosslessJSON.LosslessNumber(v.toString());
         }
         if (replacer) {
-            return replacer(key, value);
+            return replacer(k, v);
         }
         else {
-            return value;
+            return v;
         }
-    }, space).replace(re, "$1");
+    }, space);
 }
 exports.stringify = stringify;
 exports.default = {
