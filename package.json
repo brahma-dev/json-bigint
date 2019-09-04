@@ -12,8 +12,12 @@
     "rimraf": "^3.0.0",
     "typescript": "^3.5.3"
   },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
+  },
   "scripts": {
-    "build": "rimraf dist && tsc"
+	 "build": "rimraf dist && tsc",
+	 "publish": "npm publish && npm publish --\"@lincworld:registry=https://registry.npmjs.org\" --access=public"
   },
   "eslintConfig": {
     "extends": "@lincworld",
