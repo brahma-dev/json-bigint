@@ -1,4 +1,3 @@
-import minify from "jsonminify";
 const LosslessJSON = require("lossless-json");
 export function parse(str: string, reviver?: Function) {
 	return LosslessJSON.parse(str, (key: any, value: any) => {

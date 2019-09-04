@@ -33,3 +33,4 @@ exports.default = {
     parse,
     stringify
 };
+//# sourceMappingURL=index.js.map
