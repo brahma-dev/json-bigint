@@ -1,5 +1,5 @@
 {
-  "name": "@brahma-dev/json-bigint",
+  "name": "@lincworld/json-bigint",
   "version": "1.0.0",
   "description": "JSON parser that exclusively uses BigInt",
   "main": "dist/index.js",
@@ -23,12 +23,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brahma-dev/json-bigint.git"
+    "url": "git+https://github.com/LincWorld/json-bigint.git"
   },
   "author": "Brahma Dev",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/brahma-dev/json-bigint/issues"
+    "url": "https://github.com/LincWorld/json-bigint/issues"
   },
-  "homepage": "https://github.com/brahma-dev/json-bigint#readme"
+  "homepage": "https://github.com/LincWorld/json-bigint#readme"
 }
